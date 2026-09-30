@@ -1,59 +1,77 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📦 Atividade: Povoamento de Base de Dados com Laravel (Seeders)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este repositório contém a implementação prática dos conceitos de povoamento de bases de dados (Seeders) utilizando a framework Laravel. O objetivo do projeto é demonstrar a criação estruturada de tabelas, a inserção massiva de dados e a geração de um script de cópia de segurança (dump) SQL final para garantir o versionamento da estrutura e dos dados.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚀 Etapas da Construção
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Criação e Configuração dos Seeders
+- Criação da migração para a tabela `produtos`.
+- Geração da classe `ProdutoSeeder` via CLI do Artisan (`php artisan make:seeder ProdutoSeeder`).
+- Implementação da lógica de inserção massiva dentro do método `run()`, utilizando a Facade `DB::table('produtos')->insert()`.
+- Registo da classe no orquestrador central `DatabaseSeeder.php`.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Execução do Povoamento (Seeding)
+- Configuração das credenciais da base de dados MySQL no ficheiro `.env`.
+- Execução do comando integrado para recriar as tabelas e povoar a base de dados:
+  ```bash
+  php artisan migrate:fresh --seed
+Validação da integridade dos dados e das regras relacionais diretamente no SGBD (phpMyAdmin).
 
-## Learning Laravel
+3. Exportação da Base de Dados (Dump)
+Realização do dump completo da base de dados após a validação.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+O artefacto gerado (atividade_seeders.sql) encontra-se na raiz deste repositório, contendo as instruções DDL (estrutura) e DML (dados).
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+🛠️ Como Executar o Projeto Localmente
+Clonar o repositório:
 
-## Laravel Sponsors
+Bash
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+git clone [https://github.com/SEU-USUARIO/atividade-seeders.git](https://github.com/SEU-USUARIO/atividade-seeders.git)
+cd atividade-seeders
+Instalar as dependências:
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Bash
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+composer install
+Configurar o ambiente (.env):
+Duplique o ficheiro .env.example para .env e configure as suas credenciais do MySQL:
 
-## Code of Conduct
+Snippet de código
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=atividade_seeders
+DB_USERNAME=root
+DB_PASSWORD=
+Gerar a chave da aplicação e limpar a cache:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Bash
 
-## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+php artisan key:generate
+php artisan config:clear
+Executar as migrações e os seeders:
+
+Bash
+
+
+php artisan migrate:fresh --seed
+📂 Ficheiros de Destaque
+Migration: database/migrations/xxxx_xx_xx_xxxxxx_create_produtos_table.php
+
+Seeder: database/seeders/ProdutoSeeder.php
+
+DatabaseSeeder: database/seeders/DatabaseSeeder.php
+
+Dump SQL: atividade_seeders.sql (na raiz do projeto)
+
+Desenvolvido por: Rodrigo Rocha Silva
+
+Link do vídeo: [https://youtu.be/d0sYX6TQBS0](https://youtu.be/d0sYX6TQBS0)
